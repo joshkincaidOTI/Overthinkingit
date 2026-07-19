@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180.png">
   <style>
   :root {
     --bg: #F7F2E9;
@@ -47,8 +46,24 @@
     font-family: 'Fraunces', serif;
     font-weight: 600;
     font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
   .brand .paren { color: var(--coral); }
+  .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.3em;
+    line-height: 1;
+    color: var(--coral);
+  }
+  .brand-mark .o-mark {
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.72em;
+    margin: 0 0.03em;
+  }
 
   nav { display: flex; gap: 28px; font-size: 0.9rem; font-weight: 500; }
   nav a {
@@ -75,18 +90,6 @@
     max-width: 1200px;
     margin: 0 auto;
     text-align: center;
-  }
-
-  .hero-parens {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(6rem, 18vw, 15rem);
-    line-height: 0.7;
-    color: var(--coral);
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    user-select: none;
-    margin-bottom: -6px;
   }
 
   .hero h1 {
@@ -248,7 +251,16 @@
     font-size: 9rem;
     line-height: 1;
     text-align: center;
-    color: #2E5450;
+    color: var(--coral);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.02em;
+  }
+  .feature .big-paren .o-mark {
+    color: #F2EEE3;
+    font-weight: 600;
+    font-size: 0.7em;
   }
 
   /* ---------- Newsletter ---------- */
@@ -315,7 +327,10 @@
 <body>
 
 <header>
-  <div class="brand">overthinking&nbsp;<span class="paren">(</span>it<span class="paren">)</span></div>
+  <div class="brand">
+    <span class="brand-mark">(<span class="o-mark">O</span>)</span>
+    overthinking&nbsp;<span class="paren">(</span>it<span class="paren">)</span>
+  </div>
   <nav>
     <a href="#about">Why This Exists</a>
     <a href="#everything">Everything I Use</a>
@@ -325,7 +340,6 @@
 </header>
 
 <section class="hero">
-  <div class="hero-parens">(&nbsp;&nbsp;)</div>
   <h1 class="serif">I researched this to death, so you don't have to</h1>
   <p class="lede">Every pick here failed at least once before it made the list. What it replaced, why it won, and the one catch nobody mentions &mdash; every single time.</p>
   <div class="hero-actions">
@@ -397,7 +411,7 @@
       <p>The first sleep earbuds actually built for side-sleepers. Everything else in this category is regular earbuds with a sleep label slapped on.</p>
       <span class="verdict-tag">Verdict: worth it</span>
     </div>
-    <div class="big-paren">( )</div>
+    <div class="big-paren">(<span class="o-mark">O</span>)</div>
   </div>
 </section>
 
