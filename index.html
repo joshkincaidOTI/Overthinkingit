@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overthinking (it) — Editorial Direction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F2E9;
+    --card: #FFFFFF;
+    --ink: #171614;
+    --ink-soft: #58544C;
+    --coral: #FF5A36;
+    --forest: #1F3A3D;
+    --line: #E7DFCF;
+    --caption: #98917F;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  a { color: inherit; }
+
+  .serif { font-family: 'Fraunces', serif; }
+
+  /* ---------- Header ---------- */
+  header {
+    padding: 26px 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    border-bottom: 3px solid var(--ink);
+  }
+
+  .brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
+  .brand .paren { color: var(--coral); }
+
+  nav { display: flex; gap: 28px; font-size: 0.9rem; font-weight: 500; }
+  nav a {
+    text-decoration: none;
+    color: var(--ink);
+    position: relative;
+  }
+  nav a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -4px;
+    height: 3px;
+    background: var(--coral);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+  }
+  nav a:hover::after, nav a:focus-visible::after { transform: scaleX(1); }
+
+  /* ---------- Hero: giant parens as graphic device ---------- */
+  .hero {
+    position: relative;
+    padding: 90px 6vw 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-parens {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(6rem, 18vw, 15rem);
+    line-height: 0.7;
+    color: var(--coral);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    user-select: none;
+    margin-bottom: -6px;
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2.4rem, 6vw, 4.6rem);
+    line-height: 1.05;
+    margin: 0 auto 22px;
+    max-width: 16ch;
+  }
+
+  .hero p.lede {
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    max-width: 52ch;
+    margin: 0 auto 34px;
+  }
+
+  .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  .btn {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding: 15px 26px;
+    text-decoration: none;
+    display: inline-block;
+    border: 3px solid var(--ink);
+    border-radius: 100px;
+    transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+  }
+  .btn-solid { background: var(--ink); color: var(--bg); }
+  .btn-solid:hover { background: var(--coral); border-color: var(--coral); transform: translateY(-2px); }
+  .btn-outline { color: var(--ink); background: transparent; }
+  .btn-outline:hover { background: var(--ink); color: var(--bg); transform: translateY(-2px); }
+
+  /* ---------- About / Why This Exists ---------- */
+  .about {
+    max-width: 900px;
+    margin: 0 auto 70px;
+    padding: 0 6vw;
+    text-align: center;
+  }
+  .about .eyebrow {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--coral);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+  }
+  .about h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.9rem;
+    margin: 0 0 20px;
+  }
+  .about p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+  }
+  .about p:last-child { margin-bottom: 0; }
+  .about strong { color: var(--ink); }
+
+  /* ---------- Sections ---------- */
+  .section { max-width: 1200px; margin: 0 auto; padding: 20px 6vw 90px; }
+
+  .section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 36px; flex-wrap: wrap; gap: 12px; }
+  .section-head .eyebrow {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--coral);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .section-head h2 { font-family: 'Fraunces', serif; font-size: 2rem; margin: 0; font-weight: 600; }
+  .section-head .count { font-size: 0.9rem; color: var(--caption); }
+
+  /* ---------- Category cards: bold color-blocked ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 3px solid var(--ink);
+    border-radius: 18px;
+    padding: 26px;
+    text-decoration: none;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    min-height: 190px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .card:hover, .card:focus-visible {
+    transform: translateY(-4px) rotate(-0.5deg);
+    box-shadow: 6px 8px 0 var(--ink);
+  }
+  .card .tag {
+    align-self: flex-start;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--coral);
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+  .card h3 { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 600; margin: 0 0 8px; }
+  .card p { font-size: 0.9rem; color: var(--ink-soft); margin: 0; flex-grow: 1; }
+  .card .go {
+    align-self: flex-end;
+    font-size: 1.4rem;
+    color: var(--forest);
+    margin-top: 10px;
+  }
+
+  /* alternate accent for every 3rd card */
+  .card:nth-child(3n) .tag { background: var(--forest); }
+
+  /* ---------- Featured entry: magazine pull layout ---------- */
+  .feature {
+    background: var(--forest);
+    color: #F2EEE3;
+    border-radius: 24px;
+    padding: 50px 6vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 90px;
+  }
+  .feature .eyebrow { color: #9FD6C9; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .feature h3 { font-family: 'Fraunces', serif; font-size: 2.4rem; margin: 12px 0 16px; font-weight: 600; }
+  .feature p { font-size: 1rem; color: #D6D0C1; margin: 0 0 20px; max-width: 46ch; }
+  .feature .verdict-tag {
+    display: inline-block;
+    background: var(--coral);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    border-radius: 100px;
+  }
+  .feature .big-paren {
+    font-family: 'Fraunces', serif;
+    font-size: 9rem;
+    line-height: 1;
+    text-align: center;
+    color: #2E5450;
+  }
+
+  /* ---------- Newsletter ---------- */
+  .subscribe {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 80px 6vw;
+    text-align: center;
+    border-radius: 24px;
+    max-width: 1200px;
+    margin: 0 auto 60px;
+  }
+  .subscribe .eyebrow { color: var(--coral); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .subscribe h2 { font-family: 'Fraunces', serif; font-size: 2.4rem; margin: 14px 0 12px; font-weight: 600; }
+  .subscribe p { color: #C7C2B5; margin: 0 0 32px; max-width: 46ch; margin-left: auto; margin-right: auto; }
+
+  form.signup { display: flex; gap: 10px; max-width: 440px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+  form.signup input[type="email"] {
+    flex: 1; min-width: 220px; background: #26241F; border: 2px solid #423F37;
+    color: var(--bg); font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; padding: 14px 18px; border-radius: 100px;
+  }
+  form.signup input::placeholder { color: #857F70; }
+  form.signup button {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.9rem;
+    background: var(--coral); color: #fff; border: none; padding: 14px 26px; border-radius: 100px; cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  form.signup button:hover { background: #E14A28; transform: translateY(-2px); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 34px 6vw 50px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.82rem;
+    color: var(--caption);
+    border-top: 3px solid var(--ink);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--ink); }
+
+  @media (max-width: 820px) {
+    .feature { grid-template-columns: 1fr; text-align: center; }
+    .feature .big-paren { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">overthinking&nbsp;<span class="paren">(</span>it<span class="paren">)</span></div>
+  <nav>
+    <a href="#about">Why This Exists</a>
+    <a href="#everything">Everything I Use</a>
+    <a href="#log">The Log</a>
+    <a href="#subscribe">Subscribe</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-parens">(&nbsp;&nbsp;)</div>
+  <h1 class="serif">I researched this to death, so you don't have to</h1>
+  <p class="lede">Every pick here failed at least once before it made the list. What it replaced, why it won, and the one catch nobody mentions &mdash; every single time.</p>
+  <div class="hero-actions">
+    <a href="#everything" class="btn btn-solid">See everything I use</a>
+    <a href="https://overthinkingitco.substack.com/subscribe" class="btn btn-outline" target="_blank">Get the next verdict</a>
+  </div>
+</section>
+
+<section class="section" id="everything">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">Browse by category</span>
+      <h2 class="serif">Everything I use</h2>
+    </div>
+    <span class="count">14 items, updated weekly-ish</span>
+  </div>
+  <div class="grid">
+    <a href="#" class="card">
+      <span class="tag">Sleep</span>
+      <h3 class="serif">Sleep &amp; Recovery</h3>
+      <p>Sleepbuds, sound machine, eye mask, heating pad &mdash; the whole stack, one failed product at a time.</p>
+      <span class="go">&rarr;</span>
+    </a>
+    <a href="#" class="card">
+      <span class="tag">Charge</span>
+      <h3 class="serif">Cables &amp; Charging</h3>
+      <p>Never caught with the wrong cable again. Travel charger, breakaway dongles, the 15ft cable.</p>
+      <span class="go">&rarr;</span>
+    </a>
+    <a href="#" class="card">
+      <span class="tag">Desk</span>
+      <h3 class="serif">Desk &amp; Workspace</h3>
+      <p>Small annoyances, permanently solved. Keyboard, mouse, vacuum, that box opener.</p>
+      <span class="go">&rarr;</span>
+    </a>
+    <a href="#" class="card">
+      <span class="tag">Software</span>
+      <h3 class="serif">Apps &amp; Software</h3>
+      <p>Four apps I open daily, and the password manager I trust with everything else.</p>
+      <span class="go">&rarr;</span>
+    </a>
+    <a href="#" class="card">
+      <span class="tag">EV</span>
+      <h3 class="serif">EV &amp; Car Life</h3>
+      <p>The adapter and the cubby &mdash; niche, but saves me once a month, easily.</p>
+      <span class="go">&rarr;</span>
+    </a>
+    <a href="#" class="card">
+      <span class="tag">Everyday</span>
+      <h3 class="serif">Comfort &amp; Wear</h3>
+      <p>Slippers, wallet, sling &mdash; comfort items that earned it the boring way: daily use.</p>
+      <span class="go">&rarr;</span>
+    </a>
+  </div>
+</section>
+
+<section class="section" id="log" style="padding-top:0;">
+  <div class="feature">
+    <div>
+      <span class="eyebrow">This week's obsession</span>
+      <h3 class="serif">Ozlo Sleepbuds</h3>
+      <p>The first sleep earbuds actually built for side-sleepers. Everything else in this category is regular earbuds with a sleep label slapped on.</p>
+      <span class="verdict-tag">Verdict: worth it</span>
+    </div>
+    <div class="big-paren">( )</div>
+  </div>
+</section>
+
+<section class="subscribe" id="subscribe">
+  <span class="eyebrow">Overthinking (it) &mdash; the newsletter</span>
+  <h2 class="serif">One obsession, every other week.</h2>
+  <p>This week's pick, what I'm still testing, and a couple of quick verdicts. No spam, no sponsors pretending to be picks.</p>
+  <form class="signup" action="https://overthinkingitco.substack.com/subscribe" method="get" target="_blank">
+    <input type="email" name="email" placeholder="you@email.com" required>
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+
+<footer>
+  <span>&copy; 2026 Overthinking (it)</span>
+  <span><a href="#everything">Everything I Use</a> &nbsp;&middot;&nbsp; <a href="#subscribe">Newsletter</a> &nbsp;&middot;&nbsp; <a href="#">Contact</a></span>
+</footer>
+
+</body>
+</html>
